@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -e
+cd "$(dirname "$0")"
+
+bsd_md5=false
+
+if command -v md5 > /dev/null; then
+    echo "Info: using BSD md5."
+    bsd_md5=true
+elif command -v md5sum > /dev/null; then
+    echo "Info: using GNU Coreutils md5sum."
+else
+    echo "Error: could not find a md5 or md5sum command to verify tests!"
+    exit 1
+fi
+
+# Update as number of test cases increase.
+number_of_tests=12
+
+rm -rf tests/saves
+
+if [ "$1" == "clean" ]; then
+    make clean-build
+    echo "Test files and current builds of thigsgen have been deleted."
+    exit 0
+fi
+
+# Regenerate executable regardless to apply any possible code changes.
+make
+
+for ((i=1; i<=number_of_tests; i++))
+do
+    build/thigsgen tests/test-$i.txt
+    mkdir -p tests/saves/test-$i
+    mv TONYHAXINTGS0 tests/saves/test-$i/TONYHAXINTGS0
+    if [ "$bsd_md5" == true ]; then
+        md5 tests/saves/test-$i/TONYHAXINTGS0 | awk '{ print $4 }' >> tests/saves/save-checksums.txt
+    else
+        md5sum tests/saves/test-$i/TONYHAXINTGS0 | awk '{ print $1 }' >> tests/saves/save-checksums.txt
+    fi
+done
+
+
+if [ "$1" == "update" ]; then
+    cp tests/saves/save-checksums.txt tests/known-good-save-checksums.txt
+    echo "Known good save checksums updated for test suite."
+    exit 1
+fi
+
+test_number=1
+fail_count=0
+
+while read -r line1 && read -r line2 <&3; do
+    if [ "$line1" != "$line2" ]; then
+        echo "Test $test_number FAILED to match known good checksum!"
+        ((fail_count++))
+    else
+        echo "Test $test_number matched known good checksum."
+    fi
+    ((test_number++))
+done < tests/known-good-save-checksums.txt 3< tests/saves/save-checksums.txt
+
+if [ $fail_count -eq 0 ]; then
+    echo "All tests PASSED successfully!"
+else
+    echo "$fail_count test(s) FAILED!"
+fi

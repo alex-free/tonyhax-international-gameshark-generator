@@ -1,0 +1,15 @@
+Alex Free
+thigsgen
+2.0.5
+Generates save game files containing GameShark codes for Tonyhax International from txt files.
+3-BSD
+https://github.com/alex-free/tonyhax-international-gameshark-generator
+thigsgen
+*.md images
+build-essential g++-multilib gcc-multilib mingw-w64-tools g++-mingw-w64 zip dpkg-dev rpm
+gcc g++ libstdc++-static.i686 glibc-static.i686 libstdc++-static.x86_64 mingw64-gcc mingw32-gcc mingw32-gcc-c++ mingw64-gcc-c++ zip
+mingw-w64
+gcc
+-Wall -Wextra -Werror -pedantic
+-Wall -Wextra -Werror -pedantic -static
+thigsgen.c

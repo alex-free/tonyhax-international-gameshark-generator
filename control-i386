@@ -1,0 +1,6 @@
+Package: thigsgen
+Version: 2.0.5
+Maintainer: Alex Free
+Architecture: i386
+Homepage: https://github.com/alex-free/tonyhax-international-gameshark-generator
+Description: Generates save game files containing GameShark codes for Tonyhax International from txt files.
