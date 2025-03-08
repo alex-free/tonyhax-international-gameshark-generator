@@ -2,7 +2,7 @@
 
 _By Alex Free_
 
-Tonyhax International now has the ability to apply user-supplied GameShark codes to any game before starting it. This uses my save game GameShark storage system as well as MottZilla's 'Cheat Engine', the latter of which has only previously been put to use by Tonyhax International's built-in [anti-piracy bypass system](anti-piracy-bypass.md). THIGSGEN is the program that generate PS1 memory card save files containing GameShark codes.
+[Tonyhax International](https://github.com/alex-free/tonyhax) now has the ability to apply user-supplied GameShark codes to any game before starting it. This uses my save game GameShark storage system as well as MottZilla's 'Cheat Engine', the latter of which has only previously been put to use by Tonyhax International's built-in [anti-piracy bypass system](https://github.com/alex-free/tonyhax/blob/master/anti-piracy-bypass.md). THIGSGEN is the program that generate PS1 memory card save files containing GameShark codes.
 
 | [Homepage](https://alex-free.github.io/tonyhax-international-gameshark-generator) | [GitHub](https://github.com/alex-free/tonyhax-international-gameshark-generator) |
 
@@ -112,8 +112,6 @@ On Windows and most Linux distributions, you can simply drag the txt file of gam
 * Recursive `D0`, `D1`, `D2`, `D3`, `E0`, `E1`, `E2`, and `E3` codes are not yet supported. If the first line is one of the prefixes mentioned previously, the following line must have a prefix of `30`, `50`, or `80`.
 
 ## Copying The Generated Save File To A PS1 Memory Card
-
-So now you should have a `TONYHAXINTGS0` file (or multiple files, correctly numbered at the end of the filename with 0 through 14)containing the GameShark codes you desire to use. The next step is to copy the file(s) to your PS1 memory card.
 
 You can use a PS2 console to copy the save files to a PS1 memory card from a USB flash drive.
 
